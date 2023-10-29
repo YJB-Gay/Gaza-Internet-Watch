@@ -70,6 +70,7 @@ discord_payload = {
             ],
             "author": {
                 "name": "Gaza IP Address Status",
+                "url": "https://is-gaza.online/",
                 "icon_url": "https://i.imgur.com/cIbuRkt.png"
             }
         }

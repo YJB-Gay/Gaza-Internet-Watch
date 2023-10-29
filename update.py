@@ -17,7 +17,7 @@ html_content = f"""
     <meta name="description" content="Based on 137 IPs in the Gaza Strip">
     <meta property="og:title" content="Gaza Internet Watch">
     <meta property="og:description" content="Based on 137 IPs in the Gaza Strip">
-    <meta property="og:image" content="https://files.catbox.moe/zu4av6.jpg">
+    <meta property="og:image" content="https://files.catbox.moe/4ledo4.jpg">
 <head>
     <title>Gaza Internet Watch</title>
     <style>

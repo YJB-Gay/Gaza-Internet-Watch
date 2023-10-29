@@ -105,7 +105,7 @@ html_content = f"""
 <body style="margin: 0; padding: 0;">
     <h1 style="margin: 0;">Gaza Internet</h1>
     <p style="margin: 0;">Status: <span id="status">Checking...</span></p>
-    <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Offline Count: {count}</p>
+    <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Count Offline: {count}</p>
     <p style="margin: 0;">Based on 2,437 IPs in the Gaza Strip</p>
     <p style="margin: 0;"><a href="{json_url}">Logs</a></p>
     

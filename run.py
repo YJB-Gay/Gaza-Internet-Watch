@@ -11,7 +11,7 @@ delay_between_files = 5
 loop_interval = 300  # 5 minutes
 
 # Specify the Git commit message
-commit_message = "Automated script run and Git push"
+commit_message = "Automated script run and Git force push"
 
 while True:
     for file in python_files:
@@ -19,14 +19,14 @@ while True:
         subprocess.run(["python", file])
         time.sleep(delay_between_files)
 
-    # Perform a Git commit and push
+    # Perform a Git force push to the origin
     try:
         subprocess.run(["git", "add", "."])
         subprocess.run(["git", "commit", "-m", commit_message])
-        subprocess.run(["git", "push"])
-        print("Git commit and push successful.")
+        subprocess.run(["git", "push", "--force"])
+        print("Git force push to origin successful.")
     except Exception as e:
-        print(f"Error during Git commit and push: {str(e)}")
+        print(f"Error during Git force push to origin: {str(e)}")
 
     print("Waiting for the next loop...")
     time.sleep(loop_interval)

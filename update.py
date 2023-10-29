@@ -100,7 +100,7 @@ html_content = f"""
         <a id="donate-button" href="/donate">Donate To Save Gaza</a>
         <a id="image-credit" href="https://www.instagram.com/alijadallah66">Image credit Ali Jadallah - علي جادالله</a>
     </div>
-
+    <iframe src="https://free.timeanddate.com/clock/i936n020/n676/fn13/tt0/tw0/tm1/ts1/tb4" frameborder="0" width="88" height="36" style="position: absolute; top: 20px; right: 20px;"></iframe>
     <script>
         checkStatus();
     </script>

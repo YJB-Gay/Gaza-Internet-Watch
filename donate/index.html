@@ -1,61 +1,66 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            font-family: 'Helvetica', sans-serif; /* Use a sans-serif font */
-            text-align: center; /* Center all text */
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg');
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
         }
 
         h1 {
-            font-size: 36px; /* Make the header text larger */
+            font-size: 48px;
+            color: #f0f0f0;
+            text-align: center;
+            text-shadow: 2px 2px 4px #2c2f33;
         }
 
-        nav {
-            background-color: #f4f4f4;
-            padding: 20px;
-        }
-
-        ul {
+        .buttons {
             display: flex;
-            justify-content: center;
-            list-style: none;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
         }
 
-        li {
-            margin: 20px;
-        }
-
-        a.btn {
-            text-decoration: none;
-            background-color: #0076a3;
-            color: #fff;
-            font-weight: bold;
-            font-size: 24px; /* Make button text bigger */
-            padding: 15px 30px;
+        .button {
+            padding: 10px 20px;
+            font-size: 20px;
+            background-color: #e03f4f;
+            color: #f0f0f0;
+            border: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
-        a.btn:hover {
-            background-color: #004d77; /* Change button color on hover */
+        .button:hover {
+            background-color: #21784e;
+            transform: scale(1.1);
         }
+
     </style>
-    <title>DONATE TO PALESTINIAN MEDICAL ASSISTANCE</title>
 </head>
 <body>
-    <header>
-        <h1>DONATE TO PALESTINIAN MEDICAL ASSISTANCE</h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="https://www.anera.org/who-we-are/" target="_blank" class="btn">Donate to Anera</a></li>
-            <li><a href="https://www.pcrf.net/" target="_blank" class="btn">Donate to PCRF</a></li>
-            <li><a href="https://www.palestinercs.org/en" target="_blank" class="btn">Donate to Palestinian Red Crescent Society</a></li>
-            <li><a href="https://www.map.org.uk/" target="_blank" class="btn">Donate to Medical Aid for Palestinians</a></li>
-        </ul>
-    </nav>
+    <div class="container">
+        <h1>Donate To Palestinian Medical Organizations</h1>
+        <div class="buttons">
+            <a class="button" href="https://www.anera.org/">ANERA</a>
+            <a class="button" href="https://www.pcrf.net/">Palestinian Children's Relief Fund</a>
+            <a class="button" href="https://www.palestinercs.org/en">Palestine Red Crescent Society</a>
+            <a class="button" href="https://www.map.org.uk/">Medical Aid for Palestinians</a>
+        </div>
+    </div>
 </body>
 </html>

@@ -83,6 +83,20 @@ webhook_url = discord_webhook_url
 # Send the payload to the Discord webhook
 response = requests.post(webhook_url, json=discord_payload)
 
+# Define the path to the cache.json file
+cache_file_path = "cache.json"
+
+# Read the existing content of cache.json
+with open(cache_file_path, 'r') as cache_file:
+    cache_data = json.load(cache_file)
+
+# Add the count information to the cache_data dictionary
+cache_data["count"] = f"{offline_count} / {total_count}"
+
+# Write the updated cache_data back to cache.json
+with open(cache_file_path, 'w') as cache_file:
+    json.dump(cache_data, cache_file, indent=4)
+    
 # Check if the message was sent successfully
 if response.status_code == 204:
     print("Message sent to Discord successfully")

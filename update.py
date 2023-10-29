@@ -7,6 +7,7 @@ with open('cache.json', 'r', encoding='utf-8') as json_file:
 # Extract the URLs from cache.json
 txt_url = data["txt_url"]
 json_url = data["json_url"]
+count = data.get("count")
 # Full HTML content including CSS and JavaScript
 html_content = f"""
 <!DOCTYPE html>
@@ -90,11 +91,12 @@ html_content = f"""
         }}
     </script>
 </head>
-<body>
-    <h1>Gaza Internet</h1>
-    <p>Status: <span id="status">Checking...</span></p>
-    <p id="additional-info">Based on 2,437 IPs in the Gaza Strip</p>
-    <p id="more-info"><a href="{json_url}">Logs</a></p>
+<body style="margin: 0; padding: 0;">
+    <h1 style="margin: 0;">Gaza Internet</h1>
+    <p style="margin: 0;">Status: <span id="status">Checking...</span></p>
+    <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Offline Count: {count}</p>
+    <p style="margin: 0;">Based on 2,437 IPs in the Gaza Strip</p>
+    <p style="margin: 0;"><a href="{json_url}">Logs</a></p>
     
     <div>
         <a id="donate-button" href="/donate/">Donate To Save Gaza</a>

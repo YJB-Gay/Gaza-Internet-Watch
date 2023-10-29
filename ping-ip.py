@@ -151,10 +151,10 @@ ip_addresses = [
 ]
 
 # Directory path for log files
-log_directory = r"E:\Nicholas\Downloads\gaza_ip_test\logs"
+log_directory = r"E:\Nicholas\Downloads\gaza_ip_test\Gaza-Internet-Watch\logs"
 
 # Directory path for status.txt
-status_directory = r"E:\Nicholas\Downloads\gaza_ip_test"
+status_directory = r"E:\Nicholas\Downloads\gaza_ip_test\Gaza-Internet-Watch\"
 
 def ping_ip(ip):
     result = ping(ip, timeout=2)  # Set a timeout of 2 seconds

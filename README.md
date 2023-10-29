@@ -1,1 +1,1 @@
-Pings 137 IPs in the Gaza Strip to monitor internet status.
+Pings 2,436 IPs in the Gaza Strip to monitor internet status.

@@ -1,59 +1,13 @@
-import glob
 import requests
 import os
 import json
 
-# Function to calculate the offline percentage
-def calculate_offline_percentage(log_file_path):
-    with open(log_file_path, "r") as log_file:
-        log_data = json.load(log_file)
-
-    status_counts = {"offline": 0}
-    total_count = 0
-
-    for entry in log_data['ip_status']:
-        total_count += 1
-        if entry['status'] == "offline":
-            status_counts["offline"] += 1
-
-    if total_count > 0:
-        offline_percentage = (status_counts.get("offline", 0) / total_count) * 100
-    else:
-        offline_percentage = 0
-
-    return offline_percentage
-
-def find_most_recent_log():
-    log_files = glob.glob(f"{logs_dir}/Logs-*.json")
-    if not log_files:
-        return None
-    return max(log_files, key=os.path.getctime)
-
 # Litterbox API endpoint
 api_url = "https://litterbox.catbox.moe/resources/internals/api.php"
+
 # File paths
 txt_file_path = "status.txt"
 logs_dir = "logs"
-
-# Function to calculate the offline percentage
-def calculate_offline_percentage(log_file_path):
-    with open(log_file_path, "r") as log_file:
-        log_data = json.load(log_file)
-
-    status_counts = {"offline": 0}
-    total_count = 0
-
-    for entry in log_data['ip_status']:
-        total_count += 1
-        if entry['status'] == "offline":
-            status_counts["offline"] += 1
-
-    if total_count > 0:
-        offline_percentage = (status_counts.get("offline", 0) / total_count) * 100
-    else:
-        offline_percentage = 0
-
-    return offline_percentage
 
 # Determine the most recent JSON file in the /logs directory
 def get_most_recent_json_file():
@@ -62,6 +16,14 @@ def get_most_recent_json_file():
         return max(json_files, key=lambda x: os.path.getctime(os.path.join(logs_dir, x)))
     else:
         return None
+
+# Count "offline" entries in the JSON file
+def count_offline_entries(json_file_path):
+    with open(json_file_path, 'r') as json_file:
+        data = json.load(json_file)
+        offline_count = sum(1 for entry in data['ip_status'] if entry['status'] == "offline")
+        total_count = len(data['ip_status'])
+        return offline_count, total_count
 
 # Upload a file to Litterbox and return the URL
 def upload_to_litterbox(file_path, time):
@@ -79,6 +41,9 @@ def main():
     most_recent_json_file = get_most_recent_json_file()
 
     if most_recent_json_file:
+        # Count "offline" entries in the most recent JSON file
+        offline_count, total_count = count_offline_entries(os.path.join(logs_dir, most_recent_json_file))
+
         # Upload status.txt to Litterbox for 12 hours
         txt_url = upload_to_litterbox(txt_file_path, '12h')
 
@@ -87,16 +52,17 @@ def main():
             json_url = upload_to_litterbox(os.path.join(logs_dir, most_recent_json_file), '24h')
 
             if json_url:
-                # Store the URLs in cache.json
+                # Store the URLs and count in cache.json
                 cache_data = {
                     'txt_url': txt_url,
-                    'json_url': json_url
+                    'json_url': json_url,
+                    'count': f"{offline_count} / {total_count}"
                 }
 
                 with open('cache.json', 'w') as cache_file:
                     json.dump(cache_data, cache_file, indent=4)
 
-                print("Files uploaded and URLs stored in cache.json.")
+                print("Files uploaded, and URLs and count stored in cache.json.")
             else:
                 print("Failed to upload the JSON file to Litterbox.")
         else:

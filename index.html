@@ -60,10 +60,21 @@
             bottom: 20px;
             right: 20px;
         }
+        #contact-button {
+            background-color: #0074d9;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+        }
+        
     </style>
     <script>
         function checkStatus() {
-            fetch('https://litter.catbox.moe/09vefh.txt')
+            fetch('https://litter.catbox.moe/d1al18.txt')
                 .then(response => response.text())
                 .then(data => {
                     if (data.trim() === 'online') {
@@ -83,13 +94,16 @@
 <body style="margin: 0; padding: 0;">
     <h1 style="margin: 0;">Gaza Internet</h1>
     <p style="margin: 0;">Status: <span id="status">Checking...</span></p>
-    <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Offline Count: None</p>
+    <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Offline Count: 1958 / 2437</p>
     <p style="margin: 0;">Based on 2,437 IPs in the Gaza Strip</p>
-    <p style="margin: 0;"><a href="https://litter.catbox.moe/7op4ra.json">Logs</a></p>
+    <p style="margin: 0;"><a href="https://litter.catbox.moe/kyx6st.json">Logs</a></p>
     
     <div>
         <a id="donate-button" href="/donate/">Donate To Save Gaza</a>
         <a id="image-credit" href="https://www.instagram.com/alijadallah66">Image credit Ali Jadallah - علي جادالله</a>
+        <a id="contact-button" href="mailto:contact@is-gaza.online">Contact</a>
+    </div>
+    
     </div>
     <script>
         checkStatus();

@@ -71,6 +71,17 @@ html_content = f"""
             bottom: 20px;
             right: 20px;
         }}
+        #contact-button {{
+            background-color: #0074d9;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            position: fixed;
+            bottom: 70px;
+            left: 20px;
+        }}
+        
     </style>
     <script>
         function checkStatus() {{
@@ -101,6 +112,9 @@ html_content = f"""
     <div>
         <a id="donate-button" href="/donate/">Donate To Save Gaza</a>
         <a id="image-credit" href="https://www.instagram.com/alijadallah66">Image credit Ali Jadallah - علي جادالله</a>
+        <a id="contact-button" href="mailto:contact@is-gaza.online">Contact</a>
+    </div>
+    
     </div>
     <script>
         checkStatus();

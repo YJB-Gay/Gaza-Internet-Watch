@@ -4,9 +4,15 @@ import requests
 from collections import Counter
 from datetime import datetime, timedelta
 
+
+config_file_path = r'E:\Nicholas\Downloads\gaza_ip_test\config.json'
+with open(config_file_path, 'r') as config_file:
+    config = json.load(config_file)
+discord_webhook_url = config["discord"]["webhook_url"]
+openweather_api_key = config["openweather"]["api_key"]
+
 # Define the folder where the JSON files are located
 log_folder = "logs"
-
 # List all JSON files in the folder
 json_files = [f for f in os.listdir(log_folder) if f.endswith(".json")]
 
@@ -39,7 +45,6 @@ else:
 offline_count = status_counts.get("offline", 0)
 
 # Make an API call to OpenWeather to get local weather in Gaza
-openweather_api_key = "f0b8d86c7277f1c4d0d7bcd7efd92862"
 weather_response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q=Gaza&appid={openweather_api_key}")
 weather_data = weather_response.json()
 temperature_kelvin = weather_data["main"]["temp"]
@@ -73,7 +78,7 @@ discord_payload = {
 }
 
 # Your Discord webhook URL
-webhook_url = "https://canary.discord.com/api/webhooks/1167614630957420634/F2IU3zXqV2rdk1SbLnHvpZbhBtUEc2K2zOLL-_hpSKjwt6b6tkNou0M6UGVTXkx6j_Y3"
+webhook_url = discord_webhook_url
 
 # Send the payload to the Discord webhook
 response = requests.post(webhook_url, json=discord_payload)

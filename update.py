@@ -22,9 +22,9 @@ html_content = f"""
     <title>Gaza Internet Watch</title>
     <style>
         body {{
-            background-image: url('https://i.imgur.com/MSECWDM.jpg');
+            background-image: url('https://files.catbox.moe/26caxg');
             background-size: cover;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(0px);
             color: #ffffff;
             font-family: Arial, sans-serif;
             display: flex;

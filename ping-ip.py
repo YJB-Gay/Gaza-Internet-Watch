@@ -156,16 +156,36 @@ log_directory = r"E:\Nicholas\Downloads\gaza_ip_test\Gaza-Internet-Watch\logs"
 # Directory path for status.txt
 status_directory = r"E:\Nicholas\Downloads\gaza_ip_test\Gaza-Internet-Watch"
 
-def ping_ip(ip):
-    result = ping(ip, timeout=2)  # Set a timeout of 2 seconds
+import subprocess
 
-    if result is not None:
-        if result >= 0:
+def ping_ip(ip):
+    try:
+        # Run the ping command and capture the output
+        result = subprocess.check_output(["ping", "-c", "1", ip])
+
+        # Decode the result to a string
+        result_str = result.decode()
+
+        # Check for common indicators of offline status
+        if ("Destination Host Unreachable" in result_str or
+            "Request timed out" in result_str or
+            "No route to host" in result_str or
+            "Name or service not known" in result_str or
+            "could not find host" in result_str):
+            return {"ip": ip, "status": "offline"}
+
+        # Check if the ping was successful
+        if "1 packets transmitted, 1 received" in result_str:
             return {"ip": ip, "status": "online"}
         else:
             return {"ip": ip, "status": "offline"}
-    else:
+
+    except subprocess.CalledProcessError:
         return {"ip": ip, "status": "offline"}
+
+# Test the function
+result = ping_ip("37.8.83.113")
+print(result)
 
 def main():
     online_count = 0

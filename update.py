@@ -97,7 +97,7 @@ html_content = f"""
     <p id="more-info"><a href="{json_url}">Logs</a></p>
     
     <div>
-        <a id="donate-button" href="https://yjb-gay.github.io/gaza-internet-watch/donate/">Donate To Save Gaza</a>
+        <a id="donate-button" href="/donate/">Donate To Save Gaza</a>
         <a id="image-credit" href="https://www.instagram.com/alijadallah66">Image credit Ali Jadallah - علي جادالله</a>
     </div>
     <script>

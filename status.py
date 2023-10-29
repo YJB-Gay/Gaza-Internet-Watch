@@ -54,7 +54,7 @@ discord_payload = {
     "content": None,
     "embeds": [
         {
-            "title": f"{online_percentage:.2f}% {status} {emoji}",
+            "title": f"{online_percentage:.2f}% Online {emoji}",
             "description": f"Offline: {offline_count} / {total_count}",
             "color": color,
             "fields": [

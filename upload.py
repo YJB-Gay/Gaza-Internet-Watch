@@ -1,13 +1,59 @@
+import glob
 import requests
 import os
 import json
 
+# Function to calculate the offline percentage
+def calculate_offline_percentage(log_file_path):
+    with open(log_file_path, "r") as log_file:
+        log_data = json.load(log_file)
+
+    status_counts = {"offline": 0}
+    total_count = 0
+
+    for entry in log_data['ip_status']:
+        total_count += 1
+        if entry['status'] == "offline":
+            status_counts["offline"] += 1
+
+    if total_count > 0:
+        offline_percentage = (status_counts.get("offline", 0) / total_count) * 100
+    else:
+        offline_percentage = 0
+
+    return offline_percentage
+
+def find_most_recent_log():
+    log_files = glob.glob(f"{logs_dir}/Logs-*.json")
+    if not log_files:
+        return None
+    return max(log_files, key=os.path.getctime)
+
 # Litterbox API endpoint
 api_url = "https://litterbox.catbox.moe/resources/internals/api.php"
-
 # File paths
 txt_file_path = "status.txt"
 logs_dir = "logs"
+
+# Function to calculate the offline percentage
+def calculate_offline_percentage(log_file_path):
+    with open(log_file_path, "r") as log_file:
+        log_data = json.load(log_file)
+
+    status_counts = {"offline": 0}
+    total_count = 0
+
+    for entry in log_data['ip_status']:
+        total_count += 1
+        if entry['status'] == "offline":
+            status_counts["offline"] += 1
+
+    if total_count > 0:
+        offline_percentage = (status_counts.get("offline", 0) / total_count) * 100
+    else:
+        offline_percentage = 0
+
+    return offline_percentage
 
 # Determine the most recent JSON file in the /logs directory
 def get_most_recent_json_file():

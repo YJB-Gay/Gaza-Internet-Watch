@@ -14,9 +14,9 @@ html_content = f"""
 <head>
     <meta charset="utf-8">
     <title>Gaza Internet Watch</title>
-    <meta name="description" content="Based on 137 IPs in the Gaza Strip">
+    <meta name="description" content="Based on 2,437 IPs in the Gaza Strip">
     <meta property="og:title" content="Gaza Internet Watch">
-    <meta property="og:description" content="Based on 137 IPs in the Gaza Strip">
+    <meta property="og:description" content="Based on 2,437 IPs in the Gaza Strip">
     <meta property="og:image" content="https://files.catbox.moe/4ledo4.jpg">
 <head>
     <title>Gaza Internet Watch</title>
@@ -93,7 +93,7 @@ html_content = f"""
 <body>
     <h1>Gaza Internet</h1>
     <p>Status: <span id="status">Checking...</span></p>
-    <p id="additional-info">Based on 137 IPs in the Gaza Strip</p>
+    <p id="additional-info">Based on 2,437 IPs in the Gaza Strip</p>
     <p id="more-info"><a href="{json_url}">Logs</a></p>
     
     <div>

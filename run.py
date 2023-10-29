@@ -8,7 +8,7 @@ python_files = ['ping-ip.py', 'status.py', 'upload.py', 'update.py']
 delay_between_files = 5
 
 # Set the loop interval in seconds
-loop_interval = 300  # 5 minutes
+loop_interval = 0  # change time between loops
 
 # Specify the Git commit message
 commit_message = "Automated script run and Git force push"

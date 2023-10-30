@@ -33,7 +33,7 @@ online_percentage = (status_counts.get("online", 0) / total_count) * 100
 offline_percentage = (status_counts.get("offline", 0) / total_count) * 100
 
 # Determine the status and create the status message
-if online_percentage >= 25:
+if online_percentage >= 20:
     status = "online"
     color = 0x57F287  # Green color for online
     emoji = "📱"

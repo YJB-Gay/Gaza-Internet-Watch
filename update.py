@@ -1,13 +1,47 @@
 import json
+import os
 
-# Read data from cache.json
-with open('cache.json', 'r', encoding='utf-8') as json_file:
-    data = json.load(json_file)
+logs_dir = "logs"
+offline_count = 0
+total_count = 0
+json_url = ""  # Initialize json_url at the module level
+
+# Determine the most recent JSON file in the /logs directory
+def get_most_recent_json_file():
+    json_files = [f for f in os.listdir(logs_dir) if f.endswith(".json")]
+    if json_files:
+        return max(json_files, key=lambda x: os.path.getctime(os.path.join(logs_dir, x)))
+    else:
+        return None
+
+# Count "offline" entries in the JSON file
+def count_offline_entries(json_file_path):
+    with open(json_file_path, 'r') as json_file:
+        data = json.load(json_file)
+        offline_count = sum(1 for entry in data['ip_status'] if entry['status'] == "offline")
+        total_count = len(data['ip_status'])
+        return offline_count, total_count
+
+# Main function
+def main():
+    global offline_count, total_count, json_url
+    most_recent_json_file = get_most_recent_json_file()
+
+    if most_recent_json_file:
+        # Count "offline" entries in the most recent JSON file
+        offline_count, total_count = count_offline_entries(os.path.join(logs_dir, most_recent_json_file))
+
+        # Modify the URLs to point to the desired location
+        json_url = f"https://is-gaza.online/logs/{most_recent_json_file}"
+
+if __name__ == "__main__":
+    main()
 
 # Extract the URLs from cache.json
-txt_url = data["txt_url"]
-json_url = data["json_url"]
-count = data.get("count")
+txt_url = "https://is-gaza.online/status.txt"
+count = f"{offline_count} / {total_count}"
+
+
 # Full HTML content including CSS and JavaScript
 html_content = f"""
 <!DOCTYPE html>
@@ -107,7 +141,7 @@ html_content = f"""
     <p style="margin: 0;">Status: <span id="status">Checking...</span></p>
     <p style="margin: 0;">Based on 2,437 IPs in the Gaza Strip</p>
     <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Count Offline: {count}</p>
-    <p style="margin: 0; font-size: 16px;">The status will be considered offline if less than 20% of the IP addresses are online.</p>
+    <p style="margin: 0; font-size: 16px;">The status will be considered offline if less than 2% of the IP addresses are online.</p>
     <p style="margin: 0; font-size: 16px;"><a href="{json_url}" style="font-size: 16px;">Logs</a></p>
     
     <div>

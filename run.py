@@ -2,7 +2,7 @@ import time
 import subprocess
 
 # Define the list of Python files to run in order
-python_files = ['ping-ip.py', 'status.py', 'upload.py', 'update.py']
+python_files = ['ping-ip.py', 'status.py', 'update.py']
 
 # Set the delay between each file execution in seconds
 delay_between_files = 5

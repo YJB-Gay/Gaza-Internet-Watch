@@ -3,14 +3,22 @@ import json
 import requests
 from collections import Counter
 from datetime import datetime, timedelta
+import tweepy
 
 
-config_file_path = r'E:\Nicholas\Downloads\gaza_ip_test\config.json'
+script_directory = os.path.dirname(os.path.abspath(__file__))
+parent_directory = os.path.dirname(script_directory)
+config_file_path = os.path.join(parent_directory, 'config.json')
 with open(config_file_path, 'r') as config_file:
     config = json.load(config_file)
+
 discord_webhook_url = config["discord"]["webhook_url"]
 openweather_api_key = config["openweather"]["api_key"]
 
+# Read data from cache.json
+with open('cache.json', 'r', encoding='utf-8') as json_file:
+    data = json.load(json_file)
+json_url = data["json_url"]
 # Define the folder where the JSON files are located
 log_folder = "logs"
 # List all JSON files in the folder
@@ -45,7 +53,12 @@ else:
 offline_count = status_counts.get("offline", 0)
 with open("status.txt", "w") as file:
     file.write(status)
-# Make an API call to OpenWeather to get local weather in Gaza
+
+tweet_text = f"Gaza is currently {status} {emoji}.\n" \
+             f"{online_percentage:.2f}% Online\n" \
+             f"Offline: {offline_count} / {total_count}\n" \
+             f"Logs: {json_url}"
+    # Make an API call to OpenWeather to get local weather in Gaza
 weather_response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q=Gaza&appid={openweather_api_key}")
 weather_data = weather_response.json()
 temperature_kelvin = weather_data["main"]["temp"]
@@ -83,9 +96,7 @@ discord_payload = {
 webhook_url = discord_webhook_url
 
 # Send the payload to the Discord webhook
-response = requests.post(webhook_url, json=discord_payload)
-
-# Check if the message was sent successfully
+response = requests.post(webhook_url, json=discord_payload)# Check if the message was sent successfully
 if response.status_code == 204:
     print("Message sent to Discord successfully")
 else:

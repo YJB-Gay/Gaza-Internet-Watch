@@ -4,9 +4,7 @@ import os
 logs_dir = "logs"
 offline_count = 0
 total_count = 0
-json_url = ""  # Initialize json_url at the module level
-
-# Determine the most recent JSON file in the /logs directory
+json_url = ""  
 def get_most_recent_json_file():
     json_files = [f for f in os.listdir(logs_dir) if f.endswith(".json")]
     if json_files:

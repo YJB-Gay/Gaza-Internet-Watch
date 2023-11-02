@@ -35,11 +35,11 @@ def main():
 if __name__ == "__main__":
     main()
 
-# Extract the URLs from cache.json
 txt_url = "https://is-gaza.online/status.txt"
 count = f"{offline_count} / {total_count}"
-
-
+data = {"json_url": json_url}
+with open("cache.json", "w") as file:
+    json.dump(data, file)
 # Full HTML content including CSS and JavaScript
 html_content = f"""
 <!DOCTYPE html>

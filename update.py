@@ -139,7 +139,7 @@ html_content = f"""
     <p style="margin: 0;">Status: <span id="status">Checking...</span></p>
     <p style="margin: 0;">Based on 2,437 IPs in the Gaza Strip</p>
     <p id="count" style="font-size: 24px; margin: 0; padding: 0; line-height: 1.2;">Count Offline: {count}</p>
-    <p style="margin: 0; font-size: 16px;">The status will be considered offline if less than 2% of the IP addresses are online.</p>
+    <p style="margin: 0; font-size: 16px;">The status will be considered offline if less than 20% of the IP addresses are online.</p>
     <p style="margin: 0; font-size: 16px;"><a href="{json_url}" style="font-size: 16px;">Logs</a></p>
     
     <div>

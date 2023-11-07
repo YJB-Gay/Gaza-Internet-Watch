@@ -5,6 +5,9 @@ logs_dir = "logs"
 offline_count = 0
 total_count = 0
 json_url = ""  
+txt_url = "https://is-gaza.online/status.txt"
+online_url = "https://files.catbox.moe/b1v3v1.png"
+offline_url = "https://files.catbox.moe/4mbxbo.png"
 def get_most_recent_json_file():
     json_files = [f for f in os.listdir(logs_dir) if f.endswith(".json")]
     if json_files:
@@ -19,27 +22,26 @@ def count_offline_entries(json_file_path):
         offline_count = sum(1 for entry in data['ip_status'] if entry['status'] == "offline")
         total_count = len(data['ip_status'])
         return offline_count, total_count
-
-# Main function
 def main():
-    global offline_count, total_count, json_url
+    global offline_count, total_count, json_url, favicon_url
     most_recent_json_file = get_most_recent_json_file()
-
     if most_recent_json_file:
-        # Count "offline" entries in the most recent JSON file
         offline_count, total_count = count_offline_entries(os.path.join(logs_dir, most_recent_json_file))
-
-        # Modify the URLs to point to the desired location
         json_url = f"https://is-gaza.online/logs/{most_recent_json_file}"
+        if offline_count / total_count >= 0.2:
+            favicon_url = offline_url
+        else:
+            favicon_url = online_url
 
 if __name__ == "__main__":
     main()
 
-txt_url = "https://is-gaza.online/status.txt"
+
 count = f"{offline_count} / {total_count}"
 data = {"json_url": json_url}
 with open("cache.json", "w") as file:
     json.dump(data, file)
+
 # Full HTML content including CSS and JavaScript
 html_content = f"""
 <!DOCTYPE html>
@@ -47,6 +49,7 @@ html_content = f"""
 <head>
     <meta charset="utf-8">
     <title>Gaza Internet Watch</title>
+    <link rel="icon" href="{favicon_url}">
     <meta name="description" content="Based on 2,437 IPs in the Gaza Strip">
     <meta property="og:title" content="Gaza Internet Watch">
     <meta property="og:description" content="Based on 2,437 IPs in the Gaza Strip">

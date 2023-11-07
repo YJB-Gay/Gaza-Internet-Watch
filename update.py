@@ -1,5 +1,7 @@
 import json
 import os
+import csv
+import datetime
 
 logs_dir = "logs"
 offline_count = 0
@@ -38,6 +40,16 @@ if __name__ == "__main__":
 
 
 count = f"{offline_count} / {total_count}"
+def update_csv(filename, offline_count, total_count):
+    timestamp = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    percent_online = round(((total_count - offline_count) / total_count) * 100, 2)
+    online_count = total_count - offline_count
+    with open(filename, mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow([timestamp, online_count, offline_count, total_count, percent_online])
+if __name__ == "__main__":
+    csv_filename = 'data.csv'
+    update_csv(csv_filename, offline_count, total_count)
 data = {"json_url": json_url}
 with open("cache.json", "w") as file:
     json.dump(data, file)
@@ -47,6 +59,7 @@ html_content = f"""
 <!DOCTYPE html>
 <html>
 <head>
+    <meta http-equiv="refresh" content="300"> 
     <meta charset="utf-8">
     <title>Gaza Internet Watch</title>
     <link rel="icon" href="{favicon_url}">

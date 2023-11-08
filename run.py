@@ -22,7 +22,7 @@ while True:
     # Fetch changes from the remote repository (origin)
     try:
         subprocess.run(["git", "fetch", "origin"])
-        print("Git fetch from origin successful.")
+        print("Git fetch from origin successful.")                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
     except Exception as e:
         print(f"Error during Git fetch from origin: {str(e)}")
 

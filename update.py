@@ -64,12 +64,17 @@ fig.write_image("chart/chart.png")
 with open('chart/index.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 soup = BeautifulSoup(html_content, 'html.parser')
-soup.head.append(soup.new_tag('meta', attrs={'content': 'Gaza Internet Status Chart', 'property': 'og:title'}))
-soup.head.append(soup.new_tag('meta', attrs={'content': 'Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)', 'property': 'og:description'}))
-soup.head.append(soup.new_tag('meta', attrs={'content': 'https://is-gaza.online/', 'property': 'og:url'}))
-soup.head.append(soup.new_tag('meta', attrs={'content': 'https://is-gaza.online/chart/chart.pmg', 'property': 'og:image'}))
-soup.head.append(soup.new_tag('meta', attrs={'content': '#3850A0', 'name': 'theme-color'}))
-soup.head.append(soup.new_tag('meta', attrs={'content': 'summary_large_image', 'name': 'twitter:card'}))
+meta_tags = [
+    {'name': 'og:title', 'content': 'Gaza Internet Status Chart'},
+    {'name': 'og:description', 'content': 'Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)'},
+    {'name': 'og:url', 'content': 'https://is-gaza.online/'},
+    {'name': 'og:image', 'content': 'https://is-gaza.online/chart.pmg'},
+    {'name': 'theme-color', 'content': '#3850A0'},
+    {'name': 'twitter:card', 'content': 'summary_large_image'}
+]
+for tag in meta_tags:
+    meta_tag = soup.new_tag('meta', attrs={'name': tag['name'], 'content': tag['content']})
+    soup.head.append(meta_tag)
 with open('chart/index.html', 'w', encoding='utf-8') as file:
     file.write(soup.prettify())
 html_content = f"""

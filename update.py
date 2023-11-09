@@ -4,7 +4,6 @@ import csv
 import datetime
 import plotly.express as px
 import pandas as pd
-from bs4 import BeautifulSoup
 
 logs_dir = "logs"
 offline_count = 0
@@ -63,20 +62,20 @@ fig.write_html("chart/index.html")
 fig.write_image("chart/chart.png")
 with open('chart/index.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
-soup = BeautifulSoup(html_content, 'html.parser')
-meta_tags = [
-    {'name': 'og:title', 'content': 'Gaza Internet Status Chart'},
-    {'name': 'og:description', 'content': 'Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)'},
-    {'name': 'og:url', 'content': 'https://is-gaza.online/'},
-    {'name': 'og:image', 'content': 'https://is-gaza.online/chart.pmg'},
-    {'name': 'theme-color', 'content': '#3850A0'},
-    {'name': 'twitter:card', 'content': 'summary_large_image'}
-]
-for tag in meta_tags:
-    meta_tag = soup.new_tag('meta', attrs={'name': tag['name'], 'content': tag['content']})
-    soup.head.append(meta_tag)
-with open('chart/index.html', 'w', encoding='utf-8') as file:
-    file.write(soup.prettify())
+additional_head_content = """
+<title>Gaza Internet Status Chart</title>
+<meta content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)" property="og:description" />
+<meta content="https://is-gaza.online/" property="og:url" />
+<meta content="https://is-gaza.online/chart.pmg" property="og:image" />
+<meta content="#3850A0" data-react-helmet="true" name="theme-color" />
+<meta name="twitter:card" content="summary_large_image">
+"""
+head_start = html_content.find('<head>')
+head_end = html_content.find('</head>') + 7 
+modified_html = html_content[:head_end] + additional_head_content + html_content[head_end:]
+with open('index.html', 'w', encoding='utf-8') as file:
+    file.write(modified_html)
+
 html_content = f"""
 <!DOCTYPE html>
 <html>

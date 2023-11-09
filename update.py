@@ -73,7 +73,7 @@ additional_head_content = """
 head_start = html_content.find('<head>')
 head_end = html_content.find('</head>') + 7 
 modified_html = html_content[:head_end] + additional_head_content + html_content[head_end:]
-with open('index.html', 'w', encoding='utf-8') as file:
+with open('chart/index.html', 'w', encoding='utf-8') as file:
     file.write(modified_html)
 
 html_content = f"""

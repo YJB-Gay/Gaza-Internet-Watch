@@ -66,7 +66,7 @@ head_content = """
 <title>Gaza Internet Status Chart</title>
 <meta content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)" property="og:description" />
 <meta content="https://is-gaza.online/" property="og:url" />
-<meta content="https://is-gaza.online/chart/chart.pmg" property="og:image" />
+<meta content="https://is-gaza.online/chart/chart.png" property="og:image" />
 <meta content="#3850A0" data-react-helmet="true" name="theme-color" />
 <meta name="twitter:card" content="summary_large_image">
 """

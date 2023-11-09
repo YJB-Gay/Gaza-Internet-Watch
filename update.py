@@ -56,9 +56,10 @@ data = {"json_url": json_url}
 with open("cache.json", "w") as file:
     json.dump(data, file)
 df = pd.read_csv("Chart/data.csv")
-fig = px.line(df, x="Timestamp", y="Percent Online", title="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip) Website: is-gaza.online")
+fig = px.line(df, x="Timestamp", y="Percent Online", title="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)")
 fig.update_layout(template="plotly_dark")
-fig.write_html("chart/index.html")
+fig.write_html("chart/index.html")    
+fig.write_image("chart.png")
 html_content = f"""
 <!DOCTYPE html>
 <html>

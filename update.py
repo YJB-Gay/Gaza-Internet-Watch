@@ -2,6 +2,8 @@ import json
 import os
 import csv
 import datetime
+import plotly.express as px
+import pandas as pd
 
 logs_dir = "logs"
 offline_count = 0
@@ -48,13 +50,15 @@ def update_csv(filename, offline_count, total_count):
         writer = csv.writer(file)
         writer.writerow([timestamp, online_count, offline_count, total_count, percent_online])
 if __name__ == "__main__":
-    csv_filename = 'data.csv'
+    csv_filename = r'chart\data.csv'
     update_csv(csv_filename, offline_count, total_count)
 data = {"json_url": json_url}
 with open("cache.json", "w") as file:
     json.dump(data, file)
-
-# Full HTML content including CSS and JavaScript
+df = pd.read_csv("Chart/data.csv")
+fig = px.line(df, x="Timestamp", y="Percent Online", title="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip) Website: https://is-gaza.online/")
+fig.update_layout(template="plotly_dark")
+fig.write_html("chart/index.html")
 html_content = f"""
 <!DOCTYPE html>
 <html>

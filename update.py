@@ -88,6 +88,8 @@ html_content = f"""
 <head>
     <meta http-equiv="refresh" content="300"> 
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="theme-color" content="#636efa"/>
     <title>Gaza Internet Watch</title>
     <link rel="icon" href="{favicon_url}">
     <meta name="description" content="Based on 2,437 IPs in the Gaza Strip">

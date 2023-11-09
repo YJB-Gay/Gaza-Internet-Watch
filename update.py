@@ -4,6 +4,9 @@ import csv
 import datetime
 import plotly.express as px
 import pandas as pd
+import time
+
+current_unix_timestamp = int(time.time())
 
 logs_dir = "logs"
 offline_count = 0
@@ -63,12 +66,15 @@ fig.write_image("chart/chart.png")
 with open('chart/index.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 head_content = """
-<title>Gaza Internet Status Chart</title>
-<meta content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)" property="og:description" />
-<meta content="https://is-gaza.online/" property="og:url" />
-<meta content="https://is-gaza.online/chart/chart.png" property="og:image" />
-<meta content="#3850A0" data-react-helmet="true" name="theme-color" />
-<meta name="twitter:card" content="summary_large_image">
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <meta name="theme-color" content="#118a84"/>
+    <meta property="og:title" content="Gaza Internet Chart"/>
+    <meta property="og:description" content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)"/>
+    <meta property="og:image" content="https://files.catbox.moe/4ledo4.jpg"/>
+    <meta name="twitter:card" content="summary_large_image"/>
+    <meta name="twitter:image" content={`https://is-gaza.online/chart/chart.png?${current_unix_timestamp}`}/>
+    <meta name="next-head-count" content="8"/>
 """
 head_start = html_content.find('<head>')
 head_end = html_content.find('</head>') + 7 

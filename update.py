@@ -62,17 +62,17 @@ fig.write_html("chart/index.html")
 fig.write_image("chart/chart.png")
 with open('chart/index.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
-additional_head_content = """
+head_content = """
 <title>Gaza Internet Status Chart</title>
 <meta content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)" property="og:description" />
 <meta content="https://is-gaza.online/" property="og:url" />
-<meta content="https://is-gaza.online/chart.pmg" property="og:image" />
+<meta content="https://is-gaza.online/chart/chart.pmg" property="og:image" />
 <meta content="#3850A0" data-react-helmet="true" name="theme-color" />
 <meta name="twitter:card" content="summary_large_image">
 """
 head_start = html_content.find('<head>')
 head_end = html_content.find('</head>') + 7 
-modified_html = html_content[:head_end] + additional_head_content + html_content[head_end:]
+modified_html = html_content[:head_end] + head_content + html_content[head_end:]
 with open('chart/index.html', 'w', encoding='utf-8') as file:
     file.write(modified_html)
 

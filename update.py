@@ -68,10 +68,10 @@ with open('chart/index.html', 'r', encoding='utf-8') as file:
 head_content = """
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width"/>
-    <meta name="theme-color" content="#118a84"/>
+    <meta name="theme-color" content="#636efa"/>
     <meta property="og:title" content="Gaza Internet Chart"/>
     <meta property="og:description" content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)"/>
-    <meta property="og:image" content="https://files.catbox.moe/4ledo4.jpg"/>
+    <meta property="og:image" content={`https://is-gaza.online/chart/chart.png?${current_unix_timestamp}`}/>
     <meta name="twitter:card" content="summary_large_image"/>
     <meta name="twitter:image" content={`https://is-gaza.online/chart/chart.png?${current_unix_timestamp}`}/>
     <meta name="next-head-count" content="8"/>

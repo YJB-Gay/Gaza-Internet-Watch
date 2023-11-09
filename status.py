@@ -1,9 +1,11 @@
 import os
 import json
 import requests
+import time
 from collections import Counter
 from datetime import datetime, timedelta
 
+current_unix_timestamp = int(time.time())
 
 script_directory = os.path.dirname(os.path.abspath(__file__))
 parent_directory = os.path.dirname(script_directory)
@@ -81,7 +83,10 @@ discord_payload = {
                 "name": "Gaza IP Address Status",
                 "url": "https://is-gaza.online/",
                 "icon_url": "https://i.imgur.com/cIbuRkt.png"
-            }
+            },
+            "image": {
+                "url": f"https://is-gaza.online/chart/chart.png?{current_unix_timestamp}"
+        }
         }
     ],
     "attachments": []

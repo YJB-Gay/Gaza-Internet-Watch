@@ -90,9 +90,16 @@ discord_payload = {
 # Your Discord webhook URL
 webhook_url = discord_webhook_url
 
-# Send the payload to the Discord webhook
-response = requests.post(webhook_url, json=discord_payload)# Check if the message was sent successfully
-if response.status_code == 204:
-    print("Message sent to Discord successfully")
-else:
-    print(f"Failed to send message to Discord. Status code: {response.status_code}")
+try:
+    # Send the payload to the Discord webhook
+    response = requests.post(webhook_url, json=discord_payload)
+
+    # Check if the message was sent successfully
+    if response.status_code == 204:
+        print("Message sent to Discord successfully")
+    else:
+        print(f"Failed to send message to Discord. Status code: {response.status_code}")
+except requests.exceptions.ConnectionError as e:
+    print(f"Error while sending the message to Discord: {e}")
+except Exception as e:
+    print(f"An unexpected error occurred: {e}")

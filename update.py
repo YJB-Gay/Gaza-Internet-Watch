@@ -71,9 +71,9 @@ head_content = """
     <meta name="theme-color" content="#636efa"/>
     <meta property="og:title" content="Gaza Internet Chart"/>
     <meta property="og:description" content="Gaza Internet Status (Based on 2,437 IPs in the Gaza Strip)"/>
-    <meta property="og:image" content={`https://is-gaza.online/chart/chart.png?${current_unix_timestamp}`}/>
+    <meta property="og:image" content="https://is-gaza.online/chart/chart.png"/>
     <meta name="twitter:card" content="summary_large_image"/>
-    <meta name="twitter:image" content={`https://is-gaza.online/chart/chart.png?${current_unix_timestamp}`}/>
+    <meta name="twitter:image" content="https://is-gaza.online/chart/chart.png"/>
     <meta name="next-head-count" content="8"/>
 """
 head_start = html_content.find('<head>')

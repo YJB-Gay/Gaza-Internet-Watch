@@ -2461,7 +2461,7 @@ log_filename = f"Logs-{timestamp}.json"
 log_path = os.path.join(log_directory, log_filename)
 
 # Define the maximum number of logs to keep
-max_logs = 25
+max_logs = 250
 
 # Function to delete older log files if the maximum number is reached
 def cleanup_old_logs(log_directory, max_logs):

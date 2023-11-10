@@ -63,6 +63,7 @@ fig = px.line(df, x="Timestamp", y="Percent Online", title="Gaza Internet Status
 fig.update_layout(template="plotly_dark")
 fig.write_html("chart/index.html")    
 fig.write_image("chart/chart.png")
+fig.write_image(f"logs/chart-{current_unix_timestamp}.png")
 with open('chart/index.html', 'r', encoding='utf-8') as file:
     html_content = file.read()
 head_content = """

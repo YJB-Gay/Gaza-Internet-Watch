@@ -24,12 +24,14 @@ json_url = data["json_url"]
 log_folder = "logs"
 # List all JSON files in the folder
 json_files = [f for f in os.listdir(log_folder) if f.endswith(".json")]
+png_files = [f for f in os.listdir(log_folder) if f.endswith(".png")]
 
 # Sort the files by modification time and get the most recent one
-most_recent_file = max(json_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
+most_recent_png = max(png_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
+most_recent_json = max(json_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
 
 # Read the most recent JSON file
-with open(os.path.join(log_folder, most_recent_file), 'r') as file:
+with open(os.path.join(log_folder, most_recent_json), 'r') as file:
     data = json.load(file)
 
 # Extract the 'status' field from each entry in 'ip_status'
@@ -85,7 +87,7 @@ discord_payload = {
                 "icon_url": "https://i.imgur.com/cIbuRkt.png"
             },
             "image": {
-                "url": f"https://is-gaza.online/chart/chart.png?{current_unix_timestamp}"
+                "url": f"https://is-gaza.online/logs/{most_recent_png}"
         }
         }
     ],

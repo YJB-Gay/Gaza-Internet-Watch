@@ -57,16 +57,27 @@ offline_count = status_counts.get("offline", 0)
 with open("status.txt", "w") as file:
     file.write(status)
 
+try:
     # Make an API call to OpenWeather to get local weather in Gaza
-weather_response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q=Gaza&appid={openweather_api_key}")
-weather_data = weather_response.json()
-temperature_kelvin = weather_data["main"]["temp"]
-temperature_celsius = temperature_kelvin - 273.15  # Convert to Celsius
-# Get the local time for Gaza (assuming UTC+2)
-current_time = datetime.utcnow() + timedelta(hours=2)
-time_str = current_time.strftime("%H:%M:%S %Z\n%A, %d %B %Y")
-temperature_str = f"{temperature_celsius:.1f} °C"
+    weather_response = requests.get(f"http://api.openweathermap.org/data/2.5/weather?q=Gaza&appid={openweather_api_key}")
+    weather_response.raise_for_status()  # Raise an HTTPError for bad responses
 
+    weather_data = weather_response.json()
+    temperature_kelvin = weather_data["main"]["temp"]
+    temperature_celsius = temperature_kelvin - 273.15  # Convert to Celsius
+
+    # Get the local time for Gaza (assuming UTC+2)
+    current_time = datetime.utcnow() + timedelta(hours=2)
+    time_str = current_time.strftime("%H:%M:%S %Z\n%A, %d %B %Y")
+    temperature_str = f"{temperature_celsius:.1f} °C"
+
+    print(f"Weather in Gaza:")
+    print(f"Temperature: {temperature_str}")
+    print(f"Time: {time_str}")
+
+except requests.exceptions.RequestException as e:
+    print(f"Error making API request: {e}")
+    print("Could not fetch weather information.")
 # Create the Discord message payload
 discord_payload = {
     "content": None,

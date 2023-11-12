@@ -2461,12 +2461,17 @@ log_filename = f"Logs-{timestamp}.json"
 log_path = os.path.join(log_directory, log_filename)
 
 # Define the maximum number of logs to keep
-max_logs = 250
+max_logs_per_type = 250
 
-# Function to delete older log files if the maximum number is reached
-def cleanup_old_logs(log_directory, max_logs):
+def cleanup_old_logs(log_directory, max_logs_per_type):
     log_files = sorted(os.listdir(log_directory), reverse=True)
-    for old_log in log_files[max_logs:]:
+
+    json_logs = [log for log in log_files if log.endswith('.json')]
+    for old_log in json_logs[max_logs_per_type:]:
+        os.remove(os.path.join(log_directory, old_log))
+
+    png_logs = [log for log in log_files if log.endswith('.png')]
+    for old_log in png_logs[max_logs_per_type:]:
         os.remove(os.path.join(log_directory, old_log))
 
 # Define a function to check if an IP address is online
@@ -2498,4 +2503,4 @@ with open(log_path, "w") as log_file:
     json.dump(ping_results, log_file, indent=4)
 
 # Clean up old log files if the maximum number is reached
-cleanup_old_logs(log_directory, max_logs)
+cleanup_old_logs(log_directory, max_logs_per_type)

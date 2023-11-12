@@ -27,7 +27,10 @@ json_files = [f for f in os.listdir(log_folder) if f.endswith(".json")]
 png_files = [f for f in os.listdir(log_folder) if f.endswith(".png")]
 
 # Sort the files by modification time and get the most recent one
-most_recent_png = max(png_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
+if png_files:
+    most_recent_png = max(png_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
+else:
+    most_recent_png = None 
 most_recent_json = max(json_files, key=lambda f: os.path.getmtime(os.path.join(log_folder, f)))
 
 # Read the most recent JSON file
